@@ -31,7 +31,7 @@ The twelve projects, each a self-contained static page in its own folder:
 | `TimePass/` | A mental-arithmetic quiz |
 | `BetterHome/` | A new-tab search page |
 
-`Resume/Manish_Majhi-Resume.pdf` is what the header's "Resume" link
+`Resume/Manish_Majhi-Resume.pdf` is what the home page's "Download resume" button
 serves.
 
 ## How the site is put together

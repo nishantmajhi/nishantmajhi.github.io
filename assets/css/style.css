@@ -100,17 +100,6 @@ body::before{
   transition:border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
 .site-nav .links a.pill:hover{ color:var(--acid); border-color:var(--acid); background:var(--acid-soft); }
-.site-nav .links a.resume{
-  display:inline-flex; align-items:center; gap:0.5rem;
-  font-family:var(--mono); font-size:0.78rem; font-weight:700; letter-spacing:0.02em;
-  text-decoration:none; color:var(--bg); background:var(--acid);
-  padding:0.55rem 1rem; border-radius:999px;
-  box-shadow:0 6px 20px -8px rgba(200,245,60,0.55);
-  transition:transform 0.15s ease, box-shadow 0.2s ease;
-}
-.site-nav .links a.resume:hover{ transform:translateY(-1px); box-shadow:0 0 0 4px rgba(200,245,60,0.18), 0 10px 26px -8px rgba(200,245,60,0.7); }
-.site-nav .links a.resume svg{ transition:transform 0.2s ease; }
-.site-nav .links a.resume:hover svg{ transform:translateY(2px); }
 
 /* repo index nav (the browsable list, NOT the sticky header) */
 #repo-nav{ position:static; z-index:auto; display:block; }
@@ -395,6 +384,7 @@ body::before{
 
 /* ------------------------------------------------------------ contact --- */
 .contact{
+  margin-bottom:clamp(1rem, 4vw, 2rem);
   position:relative; overflow:hidden; isolation:isolate; text-align:center;
   margin-top:clamp(4rem, 10vw, 7rem); padding:clamp(2.8rem, 7vw, 5rem) clamp(1.2rem, 4vw, 3rem);
   border:1px solid var(--rule-strong); border-radius:28px;
@@ -413,13 +403,6 @@ body::before{
   line-height:0.95; letter-spacing:-0.05em; margin:0 auto 2rem; max-width:16ch;
 }
 .contact .cta{ justify-content:center; }
-
-/* ------------------------------------------------------------- footer --- */
-footer{
-  margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--rule);
-  text-align:center;
-}
-footer .note{ font-family:var(--mono); font-size:0.78rem; color:var(--faint); }
 
 /* ------------------------------------------------------------ reveals --- */
 .js [data-reveal]{
@@ -453,8 +436,6 @@ footer .note{ font-family:var(--mono); font-size:0.78rem; color:var(--faint); }
   .grep input{ flex:1; width:auto; }
   .repo-cols{ grid-template-columns:1fr; }
   .site-nav .links a.pill{ padding:0.45rem 0.75rem; }
-  .site-nav .links a.resume span{ display:none; }
-  .site-nav .links a.resume{ padding:0.55rem 0.7rem; }
   .term-body{ min-height:0; font-size:0.74rem; }
   .btn{ flex:1; justify-content:center; white-space:nowrap; padding:0.85rem 1rem; font-size:0.92rem; }
 }
