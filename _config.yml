@@ -3,13 +3,16 @@ description: "A curated list of projects by Manish Majhi — spanning Python, Ja
 url: "https://nishantmajhi.github.io"
 github_username: nishantmajhi
 
-# Repos to leave out of the Index section (this site, and other meta repos).
+# Repos to leave out of the Index section: this site, other meta repos, and
+# repos that should not be on show (KhaataGaata and consultancy are to go private).
 # Display only: the GitHub API still returns them, to anyone who asks.
 hidden_repos:
   - Blog
   - Album
   - Projects
   - nishantmajhi.github.io
+  - KhaataGaata
+  - consultancy
 
 # How the Index labels each repository's language: these four share one
 # heading, the rest are renamed below, and a repo can be given its own.
