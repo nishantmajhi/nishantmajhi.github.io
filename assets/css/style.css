@@ -23,7 +23,9 @@
 }
 
 *{ box-sizing:border-box; }
-html{ background:var(--bg); scroll-behavior:smooth; scrollbar-color:var(--rule-strong) var(--bg); scrollbar-width:thin; }
+/* the scroll progress bar under the nav does the scrollbar's job, so the
+   scrollbar is drawn in the page colour and disappears into it */
+html{ background:var(--bg); scroll-behavior:smooth; scrollbar-color:var(--bg) var(--bg); overscroll-behavior-y:none; }
 body{
   margin:0; min-height:100vh; color:var(--ink); font-family:var(--sans);
   -webkit-font-smoothing:antialiased; overflow-x:clip;
@@ -33,37 +35,9 @@ body{
 a{ color:inherit; }
 ::-webkit-scrollbar{ width:11px; height:11px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:var(--rule-strong); border:3px solid var(--bg); border-radius:8px; }
-::-webkit-scrollbar-thumb:hover{ background:var(--acid); }
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover{ background:var(--bg); }
 
-/* ------------------------------------------------- page atmosphere --- */
-.aurora{ position:fixed; inset:0; z-index:-3; overflow:hidden; pointer-events:none; }
-.aurora span{
-  position:absolute; width:46vmax; height:46vmax; border-radius:50%;
-  filter:blur(90px); opacity:0.28; mix-blend-mode:screen;
-  animation:drift 26s ease-in-out infinite alternate;
-}
-.aurora span:nth-child(1){ background:var(--acid); top:-22vmax; left:-12vmax; opacity:0.18; }
-.aurora span:nth-child(2){ background:var(--violet); top:-18vmax; right:-16vmax; animation-duration:32s; animation-delay:-8s; }
-.aurora span:nth-child(3){ background:var(--cyan); top:40vh; left:30vw; width:30vmax; height:30vmax; opacity:0.10; animation-duration:38s; animation-delay:-16s; }
-@keyframes drift{
-  0%{ transform:translate(0,0) scale(1); }
-  50%{ transform:translate(6vw,4vh) scale(1.12); }
-  100%{ transform:translate(-4vw,8vh) scale(0.94); }
-}
-body::before{
-  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size:64px 64px;
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
-          mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
-}
-.grain{
-  position:fixed; inset:-50%; z-index:-1; pointer-events:none; opacity:0.07;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/* ------------------------------------------------- scroll progress --- */
 .progress{
   position:fixed; top:0; left:0; right:0; height:2px; z-index:20; pointer-events:none;
   background:var(--grad); transform-origin:0 50%; transform:scaleX(var(--p, 0));
@@ -100,7 +74,7 @@ body::before{
   padding:0.45rem 0.9rem; border:1px solid var(--rule-strong); border-radius:999px;
   transition:border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
-.site-nav .links a.pill:hover{ color:var(--acid); border-color:var(--acid); background:var(--acid-soft); }
+.site-nav .links a.pill:hover{ color:#ff4e45; border-color:#ff4e45; background:rgba(255,40,40,0.12); }
 
 /* repo index nav (the browsable list, NOT the sticky header) */
 #repo-nav{ position:static; z-index:auto; display:block; }
