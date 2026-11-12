@@ -2,31 +2,66 @@
 layout: default
 title: "Projects | Manish Majhi"
 ---
-<header class="hero">
-  <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Manish Majhi &middot; built for the fun of building</p>
-  <h1>Projects<span class="accent">.</span></h1>
-  <p class="tagline">A running ledger of things built for the fun of building them − from a grade calculator to a recursive multiplier.</p>
-</header>
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow" data-reveal><span class="pulse" aria-hidden="true"></span>Open to opportunities &middot; Kathmandu, Nepal</p>
+    <h1 data-reveal>
+      <span class="line">Manish</span>
+      <span class="line"><span class="grad">Majhi</span><span class="dot">.</span></span>
+    </h1>
+    <p class="role" data-reveal>Developer &amp; MSc&nbsp;CSIT student &mdash; <em>building things for the fun of building them.</em></p>
+    <p class="tagline" data-reveal>A running ledger of projects, from a grade calculator to a recursive multiplier: explainers, games, tools and the odd experiment, in more languages than is strictly sensible.</p>
+    <div class="cta" data-reveal>
+      <a class="btn primary" href="#featured">See the work <span aria-hidden="true">&darr;</span></a>
+      <a class="btn ghost" href="{{ '/Resume/Manish_Majhi-Resume.pdf' | relative_url }}" download>Download resume</a>
+    </div>
+  </div>
 
-<div class="stats">
-  <div class="stat"><div class="val">{{ site.data.projects.size }}</div><div class="lbl">Featured builds</div></div>
-  <div class="stat"><div class="val" id="repo-count">−</div><div class="lbl">Repos</div></div>
-  <div class="stat"><div class="val" id="lang-count">−</div><div class="lbl">Categories</div></div>
+  <div class="term" data-reveal aria-label="Terminal listing the projects">
+    <div class="term-bar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="term-title">manish@web: ~/projects</span>
+    </div>
+    <div class="term-body">
+      <div class="t-line t-cmd" style="--d:0"><span class="t-ps">~/projects $</span> <span class="t-type">ls --web</span></div>
+      <div class="t-ls">
+        {% for project in site.data.projects %}<a class="t-out" style="--d:{{ forloop.index | plus: 6 }}" href="{{ project.folder }}/">{{ project.folder }}/</a>
+        {% endfor %}
+      </div>
+      <div class="t-line t-cmd" style="--d:20"><span class="t-ps">~/projects $</span> <span class="t-type t-type-2">echo $STACK</span></div>
+      <div class="t-line t-out t-stack" style="--d:27">C &middot; C++ &middot; Rust &middot; Python &middot; Java &middot; Kotlin &middot; PHP &middot; Go &middot; JS/TS &middot; React &middot; Svelte &middot; Vue</div>
+      <div class="t-line t-cmd" style="--d:29"><span class="t-ps">~/projects $</span> <span class="t-cursor" aria-hidden="true"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {% assign stack = "C,C++,Rust,Python,Java,Kotlin,React Native,PHP,Go,Deno,Node,React,Next.js,Svelte,Vue,Django,FastAPI,Flask,.NET,WPF,Qt,OpenGL,GTK,wxWidgets,AutoHotKey,Hugo,Jekyll" | split: "," %}
+    {% for round in (1..2) %}<div class="marquee-group">{% for s in stack %}<span>{{ s }}</span><b>✦</b>{% endfor %}</div>{% endfor %}
+  </div>
 </div>
 
-<div class="section-label" id="featured">
+<div class="stats">
+  <div class="stat" data-reveal><div class="val" data-count="{{ site.data.projects.size }}">{{ site.data.projects.size }}</div><div class="lbl">Featured builds</div></div>
+  <div class="stat" data-reveal><div class="val" id="repo-count">−</div><div class="lbl">Public repos</div></div>
+  <div class="stat" data-reveal><div class="val" id="lang-count">−</div><div class="lbl">Categories</div></div>
+</div>
+
+<div class="section-label" id="featured" data-reveal>
   <span class="num">01</span>
-  <h2>Featured entries</h2>
+  <h2>Selected work</h2>
   <span class="rest"></span>
+  <span class="hint">{{ site.data.projects.size }} live builds &middot; click to open</span>
 </div>
 
 <div class="grid">
   {% for project in site.data.projects %}
-  <div class="card">
-    <a href="{{ project.folder }}/" style="display:block;">
+  <article class="card{% if forloop.first %} card-hero{% endif %}" data-reveal>
+    <a href="{{ project.folder }}/" class="thumb-link" tabindex="-1" aria-hidden="true">
       <div class="thumb">
         <span class="entry-badge">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
-        <span class="open" aria-hidden="true">&#8599;</span>
+        <span class="open">Open <span aria-hidden="true">&#8599;</span></span>
         <img src="{{ '/assets/thumbs/' | append: project.thumb | relative_url }}" alt="{{ project.title }} preview" loading="lazy" />
       </div>
     </a>
@@ -35,21 +70,35 @@ title: "Projects | Manish Majhi"
       <div class="byline">{{ project.byline }}</div>
       <p class="desc">{{ project.desc }}</p>
     </div>
-  </div>
+  </article>
   {% endfor %}
 </div>
 
-<div class="section-label" id="index">
+<div class="section-label" id="index" data-reveal>
   <span class="num">02</span>
-  <h2>Index</h2>
+  <h2>Every repository</h2>
   <span class="rest"></span>
+  <label class="grep">
+    <span aria-hidden="true">grep</span>
+    <input id="repo-filter" type="search" placeholder="filter repos…" autocomplete="off" spellcheck="false" aria-label="Filter repositories" />
+  </label>
 </div>
 
 <nav id="repo-nav">
   <div id="repo-list">
     <div id="loading-msg">Loading GitHub repos…</div>
   </div>
+  <p id="filter-empty" hidden>No repository matches that.</p>
 </nav>
+
+<section class="contact" data-reveal>
+  <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Hiring, collaborating, or just curious?</p>
+  <h2>Let&rsquo;s build something <span class="grad">worth shipping</span>.</h2>
+  <div class="cta">
+    <a class="btn primary" href="https://www.linkedin.com/in/manishmajhi" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">&#8599;</span></a>
+    <a class="btn ghost" href="{{ '/Resume/Manish_Majhi-Resume.pdf' | relative_url }}" download>Download resume</a>
+  </div>
+</section>
 
 <script>
   const USERNAME = {{ site.github_username | jsonify }};

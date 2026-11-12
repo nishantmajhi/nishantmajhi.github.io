@@ -29,9 +29,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
 
 <nav class="site-nav">
   <div class="brand">
@@ -53,7 +58,7 @@
   <footer>
     <div class="note">&copy; {{ site.time | date: '%Y' }} Manish Majhi</div>
     <div class="links">
-      <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+      <a href="https://www.linkedin.com/in/manishmajhi" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
     </div>
   </footer>
 </div>
@@ -71,6 +76,7 @@
   }
   type();
 </script>
+<script src="{{ '/assets/js/fx.js' | relative_url }}" defer></script>
 
 </body>
 </html>
