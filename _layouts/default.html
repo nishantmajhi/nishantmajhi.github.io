@@ -39,12 +39,9 @@
 <div class="progress" aria-hidden="true"></div>
 
 <nav class="site-nav">
-  <div class="brand">
-    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="prompt"><span class="user">manish</span><span class="at">@</span><span class="host">web</span><span class="path">:~/projects</span><span class="sigil">$</span></span>
-    <span class="cmd"><span id="typed"></span><span class="cursor" aria-hidden="true"></span></span>
-  </div>
+  <div class="brand">Software Engineer</div>
   <div class="links">
+    <a class="pill" href="https://www.youtube.com/@CommonShortcomer" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">&#8599;</span></a>
     <a class="resume" href="{{ '/Resume/Manish_Majhi-Resume.pdf' | relative_url }}" download>
       <span>Resume</span>
       <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -57,25 +54,9 @@
 
   <footer>
     <div class="note">&copy; {{ site.time | date: '%Y' }} Manish Majhi</div>
-    <div class="links">
-      <a href="https://www.linkedin.com/in/manishmajhi" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
-    </div>
   </footer>
 </div>
 
-<script>
-  const text = "ls --web";
-  const el = document.getElementById('typed');
-  let i = 0;
-  function type(){
-    if(i <= text.length){
-      el.textContent = text.slice(0, i);
-      i++;
-      setTimeout(type, 75);
-    }
-  }
-  type();
-</script>
 <script src="{{ '/assets/js/fx.js' | relative_url }}" defer></script>
 
 </body>

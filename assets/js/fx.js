@@ -162,7 +162,90 @@
         shown += groupShown;
       });
       if (empty) empty.hidden = shown > 0 || !q;
+      layoutIndex();
     };
     input.addEventListener("input", apply);
+  }
+
+  /* ------------------------------------------------ Index two columns --- */
+  /*
+   * CSS columns cannot end both columns at the same height, so once the list
+   * has loaded the groups are split, in order, into two flex columns at the
+   * point where the heights come closest, and the last group in each column
+   * stretches so that both columns finish on the same line.
+   */
+  const list = document.getElementById("repo-list");
+  let groups = null; // in the order repo-index.js drew them
+  let cols = null;
+  const twoColumns = window.matchMedia("(min-width: 641px)");
+
+  function layoutIndex() {
+    if (!groups) return;
+    const visible = groups.filter((g) => !g.hidden);
+    for (const g of groups) g.style.flexGrow = "";
+
+    if (!twoColumns.matches) {
+      for (const g of groups) cols[0].appendChild(g);
+      return;
+    }
+
+    // natural heights, measured while nothing is stretched
+    const h = visible.map((g) => g.getBoundingClientRect().height);
+    const total = h.reduce((a, b) => a + b, 0);
+    let best = visible.length, bestDiff = Infinity, run = 0;
+    for (let k = 1; k <= visible.length; k++) {
+      run += h[k - 1];
+      const diff = Math.abs(run - (total - run));
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        best = k;
+      }
+    }
+    const firstRight = visible[best]; // undefined: everything goes left
+    let target = cols[0];
+    for (const g of groups) {
+      if (g === firstRight) target = cols[1];
+      target.appendChild(g);
+    }
+    for (const col of cols) {
+      const shown = [...col.children].filter((g) => !g.hidden);
+      if (shown.length) shown[shown.length - 1].style.flexGrow = "1";
+    }
+  }
+
+  function setUpIndex() {
+    groups = [...list.querySelectorAll(".lang-group")];
+    if (!groups.length) return;
+    const wrap = document.createElement("div");
+    wrap.className = "repo-cols";
+    cols = [document.createElement("div"), document.createElement("div")];
+    for (const c of cols) {
+      c.className = "repo-col";
+      wrap.appendChild(c);
+    }
+    list.appendChild(wrap);
+    list.classList.add("laid");
+    for (const g of groups) cols[0].appendChild(g);
+    layoutIndex();
+  }
+
+  if (list) {
+    const ready = () => !document.getElementById("loading-msg") && list.querySelector(".lang-group");
+    if (ready()) setUpIndex();
+    else {
+      const mo = new MutationObserver(() => {
+        if (ready()) {
+          mo.disconnect();
+          setUpIndex();
+        }
+      });
+      mo.observe(list, { childList: true });
+    }
+    let t = 0;
+    addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(layoutIndex, 150);
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutIndex);
   }
 })();
