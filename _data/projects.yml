@@ -59,7 +59,7 @@
   folder: "NameCodes"
   thumb: "namecodes.png"
   byline: "html · js"
-  desc: "KTM is Kathmandu, PKH is Pokhara. This gives people’s names short codes of the same kind."
+  desc: "Short codes for people’s names, the way KTM stands for Kathmandu and PKH for Pokhara: the consonants stay, the inner vowels go, four letters at most."
 
 - title: "Anticipator"
   index_title: "Grade Calculator for Grade IX and X"
