@@ -2,8 +2,9 @@
 layout: default
 title: "Projects | Manish Majhi"
 ---
-<header>
-  <h1>Projects</h1>
+<header class="hero">
+  <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Manish Majhi &middot; built for the fun of building</p>
+  <h1>Projects<span class="accent">.</span></h1>
   <p class="tagline">A running ledger of things built for the fun of building them − from a grade calculator to a recursive multiplier.</p>
 </header>
 
@@ -24,7 +25,8 @@ title: "Projects | Manish Majhi"
   <div class="card">
     <a href="{{ project.folder }}/" style="display:block;">
       <div class="thumb">
-        <span class="entry-badge">No. {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+        <span class="entry-badge">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+        <span class="open" aria-hidden="true">&#8599;</span>
         <img src="{{ '/assets/thumbs/' | append: project.thumb | relative_url }}" alt="{{ project.title }} preview" loading="lazy" />
       </div>
     </a>
@@ -45,7 +47,7 @@ title: "Projects | Manish Majhi"
 
 <nav id="repo-nav">
   <div id="repo-list">
-    <div id="loading-msg" style="font-family:var(--mono); font-size:0.85rem; color:var(--faint);">Loading GitHub repos…</div>
+    <div id="loading-msg">Loading GitHub repos…</div>
   </div>
 </nav>
 
