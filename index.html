@@ -4,18 +4,18 @@ title: "Projects | Manish Majhi"
 ---
 <section class="hero">
   <div class="hero-copy">
-    <h1 data-reveal>
+    <h1 class="in-1">
       <span class="line">Manish</span>
       <span class="line"><span class="grad">Majhi</span><span class="dot">.</span></span>
     </h1>
-    <p class="tagline" data-reveal>Building things for the fun of building them.</p>
-    <div class="cta" data-reveal>
+    <p class="tagline in-2">Building things for the fun of building them.</p>
+    <div class="cta in-3">
       <a class="btn primary" href="#featured">See the work <span aria-hidden="true">&darr;</span></a>
       <a class="btn ghost" href="{{ '/Resume/Manish_Majhi-Resume.pdf' | relative_url }}" download>Download resume</a>
     </div>
   </div>
 
-  <div class="term" data-reveal aria-label="Terminal listing the projects">
+  <div class="term in-2" aria-label="Terminal listing the projects">
     <div class="term-bar">
       <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="term-title">manish@web: ~/projects</span>
@@ -31,14 +31,14 @@ title: "Projects | Manish Majhi"
       <div class="t-line t-cmd" style="--d:29"><span class="t-ps">~/projects $</span> <span class="t-cursor" aria-hidden="true"></span></div>
     </div>
   </div>
-</section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    {% assign stack = "C,C++,Rust,Python,Java,Kotlin,React Native,PHP,Go,Deno,Node,React,Next.js,Svelte,Vue,Django,FastAPI,Flask,.NET,WPF,Qt,OpenGL,GTK,wxWidgets,AutoHotKey,Hugo,Jekyll" | split: "," %}
-    {% for round in (1..2) %}<div class="marquee-group">{% for s in stack %}<span>{{ s }}</span><b>✦</b>{% endfor %}</div>{% endfor %}
+  <div class="marquee in-4" aria-hidden="true">
+    <div class="marquee-track">
+      {% assign stack = "C,C++,Rust,Python,Java,Kotlin,React Native,PHP,Go,Deno,Node,React,Next.js,Svelte,Vue,Django,FastAPI,Flask,.NET,WPF,Qt,OpenGL,GTK,wxWidgets,AutoHotKey,Hugo,Jekyll" | split: "," %}
+      {% for round in (1..2) %}<div class="marquee-group">{% for s in stack %}<span>{{ s }}</span><b>✦</b>{% endfor %}</div>{% endfor %}
+    </div>
   </div>
-</div>
+</section>
 
 <div class="stats">
   <div class="stat" data-reveal><div class="val" data-count="{{ site.data.projects.size }}">{{ site.data.projects.size }}</div><div class="lbl">Featured builds</div></div>
