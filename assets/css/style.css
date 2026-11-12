@@ -18,6 +18,7 @@
   --serif:"Instrument Serif", Georgia, serif;
   --mono:"JetBrains Mono", ui-monospace, monospace;
   --radius:18px;
+  --nav-h:62px;
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 
@@ -104,7 +105,7 @@ body::before{
 /* repo index nav (the browsable list, NOT the sticky header) */
 #repo-nav{ position:static; z-index:auto; display:block; }
 
-.wrap{ max-width:1180px; margin:0 auto; padding:clamp(1.25rem, 5vh, 4.5rem) clamp(1rem, 4vw, 2.5rem) 2.5rem; }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(1rem, 4vw, 2.5rem) 2.5rem; }
 
 /* ------------------------------------------------------ shared bits --- */
 .grad{
@@ -150,6 +151,11 @@ body::before{
   grid-template-areas:"copy term" "marq marq";
   column-gap:clamp(2rem, 5vw, 4rem); row-gap:clamp(1.5rem, 5vh, 4rem);
   align-items:center; margin-bottom:clamp(3rem, 7vw, 5rem);
+  /* fill the first screen under the nav, with the content centred in it */
+  min-height:calc(100vh - var(--nav-h));
+  min-height:calc(100svh - var(--nav-h));
+  align-content:center;
+  padding-block:clamp(1.25rem, 4vh, 3rem);
 }
 .hero-copy{ grid-area:copy; }
 .hero .term{ grid-area:term; }
