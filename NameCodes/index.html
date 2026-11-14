@@ -390,27 +390,20 @@
         color: var(--on-panel-faint);
         letter-spacing: 0.12em;
       }
-      /* A real Code 128 symbol, only as wide as it needs to be. Scanners want
-         dark bars on a light ground, and each bar at least two screen pixels:
-         2px on an ordinary screen, 1px where a pixel is two or more. */
       .barcode {
-        align-self: flex-start;
-        display: flex;
         height: 34px;
-        padding: 3px 0;
-        border-radius: 3px;
-        background: var(--on-panel);
-        color: var(--ink);
-      }
-      .barcode svg {
-        width: 286px;
-        height: 100%;
-        fill: currentColor;
-      }
-      @media (min-resolution: 2dppx) {
-        .barcode svg {
-          width: 143px;
-        }
+        opacity: 0.55;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--on-panel) 0 2px,
+          transparent 2px 4px,
+          var(--on-panel) 4px 5px,
+          transparent 5px 8px,
+          var(--on-panel) 8px 11px,
+          transparent 11px 12px,
+          var(--on-panel) 12px 13px,
+          transparent 13px 17px
+        );
       }
 
       /* ------------------------------------------- board of taken codes */
@@ -598,8 +591,7 @@
           </div>
           <div class="letters">
             <div class="strip" id="strip" aria-label="Letters kept and dropped"></div>
-            <!-- scan me -->
-            <div class="barcode" aria-hidden="true"><svg viewBox="0 0 143 40" preserveAspectRatio="none" shape-rendering="crispEdges"><rect x="10" width="2" height="40"/><rect x="13" width="1" height="40"/><rect x="16" width="1" height="40"/><rect x="21" width="2" height="40"/><rect x="26" width="1" height="40"/><rect x="28" width="1" height="40"/><rect x="32" width="2" height="40"/><rect x="37" width="1" height="40"/><rect x="41" width="1" height="40"/><rect x="43" width="2" height="40"/><rect x="46" width="2" height="40"/><rect x="50" width="2" height="40"/><rect x="54" width="2" height="40"/><rect x="57" width="3" height="40"/><rect x="63" width="1" height="40"/><rect x="65" width="2" height="40"/><rect x="70" width="1" height="40"/><rect x="72" width="1" height="40"/><rect x="76" width="1" height="40"/><rect x="80" width="2" height="40"/><rect x="83" width="1" height="40"/><rect x="87" width="2" height="40"/><rect x="92" width="1" height="40"/><rect x="94" width="3" height="40"/><rect x="98" width="1" height="40"/><rect x="102" width="2" height="40"/><rect x="105" width="1" height="40"/><rect x="109" width="3" height="40"/><rect x="113" width="4" height="40"/><rect x="118" width="1" height="40"/><rect x="120" width="2" height="40"/><rect x="125" width="3" height="40"/><rect x="129" width="1" height="40"/><rect x="131" width="2" height="40"/></svg></div>
+            <div class="barcode" aria-hidden="true"></div>
           </div>
         </div>
         <div class="pass-stub" aria-live="polite">
