@@ -80,22 +80,17 @@
       }
 
       /* ----------------------------------------------------- boarding pass */
-      /* Two rows shared by both halves of the pass: the name and the code
-         above, the letters and the alternate below. Sharing them keeps the
-         name's underline level with the line over the alternate. */
       .pass {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 290px;
-        grid-template-rows: auto auto;
       }
       .pass-main,
       .pass-stub {
         background: var(--panel);
         color: var(--on-panel);
         position: relative;
-        grid-row: 1 / span 2;
-        display: grid;
-        grid-template-rows: subgrid;
+        display: flex;
+        flex-direction: column;
       }
       .pass-main {
         border-radius: 14px 0 0 14px;
@@ -124,14 +119,6 @@
         border-left: 2px dashed var(--on-panel-faint);
       }
 
-      /* the pass's top line stays at the top; the name sits on the row's floor */
-      .from {
-        display: flex;
-        flex-direction: column;
-      }
-      .from .tag {
-        margin-top: auto;
-      }
       .pass-top {
         display: flex;
         justify-content: space-between;
@@ -186,13 +173,13 @@
       }
 
       /* the name, letter by letter: what stays is lit, what goes is struck */
+      /* the letters, then the barcode under them, at the foot of the pass */
       .letters {
         display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: 12px 16px;
+        flex-direction: column;
+        gap: 20px;
         padding-top: 22px;
-        align-self: end;
+        margin-top: auto;
       }
       .strip {
         display: flex;
@@ -235,13 +222,11 @@
       }
 
       /* ------------------------------------------------------------- stub */
-      /* the cards take the stub's two rows: the code above, the alternate below */
       #output {
-        display: contents;
-      }
-      .code-card.is-primary {
-        align-self: start;
-        padding-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        flex: 1;
       }
       .code-card {
         position: relative;
@@ -372,8 +357,8 @@
         justify-content: space-between;
         align-items: center;
         gap: 8px 12px;
-        padding-top: 14px;
-        border-top: 1px solid var(--seam);
+        /* down at the foot of the stub, level with the barcode */
+        margin-top: auto;
       }
       .code-card:not(.is-primary) .label {
         flex-basis: 100%;
@@ -401,13 +386,8 @@
         color: var(--on-panel-faint);
         letter-spacing: 0.12em;
       }
-      /* fills what the letters leave, up to its full width */
       .barcode {
-        flex: 1 1 0;
-        min-width: 56px;
-        max-width: 150px;
-        height: 2.6rem;
-        margin-left: auto;
+        height: 34px;
         opacity: 0.55;
         background: repeating-linear-gradient(
           90deg,
@@ -558,21 +538,6 @@
       @media (max-width: 680px) {
         .pass {
           grid-template-columns: 1fr;
-          grid-template-rows: none;
-        }
-        .pass-main,
-        .pass-stub {
-          grid-row: auto;
-          display: block;
-        }
-        .code-card.is-primary {
-          padding-bottom: 0;
-        }
-        .code-card:not(.is-primary) {
-          margin-top: 16px;
-        }
-        .barcode {
-          max-width: 96px;
         }
         .pass-main {
           border-radius: 14px 14px 0 0;
