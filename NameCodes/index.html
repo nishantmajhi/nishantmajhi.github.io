@@ -37,6 +37,16 @@
         margin: 0;
         padding: 0;
       }
+      /* the scrollbar disappears into the page's yellow */
+      html {
+        background: var(--sign);
+        scrollbar-color: var(--sign) var(--sign);
+      }
+      ::-webkit-scrollbar,
+      ::-webkit-scrollbar-track,
+      ::-webkit-scrollbar-thumb {
+        background: var(--sign);
+      }
       body {
         position: relative;
         background: var(--sign);
@@ -267,9 +277,6 @@
       .code-card .status.available {
         color: var(--good);
       }
-      .code-card .status.taken {
-        display: none;
-      }
       .code-card .code {
         position: relative;
         display: inline-block;
@@ -284,36 +291,33 @@
         font-size: clamp(3.6rem, 9vw, 4.6rem);
         color: var(--on-panel);
       }
-      /* a taken code gets stamped */
+      /* a taken code is dimmed, and stamped where "Available" would be */
       .code-card.taken .code {
         color: var(--on-panel-faint);
       }
-      .code-card.taken .code::after {
-        content: "Taken";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) rotate(-10deg);
-        font-family: var(--mono);
-        font-size: 0.9rem;
-        font-weight: 800;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        white-space: nowrap;
+      .code-card .status.taken {
+        display: inline-block;
         color: #fff;
         background: var(--bad);
         border: 2px solid #fff;
-        border-radius: 5px;
-        padding: 3px 10px 3px 12px;
-        box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        padding: 2px 7px 2px 9px;
+        letter-spacing: 0.18em;
+        transform: rotate(-8deg);
+        /* overhangs the label row instead of making it taller */
+        margin-block: -10px;
+        box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.8);
         animation: stamp 0.35s cubic-bezier(0.2, 1.6, 0.4, 1);
       }
-      .code-card.is-primary.taken .code::after {
-        font-size: 1.3rem;
+      .code-card .status.taken::before {
+        display: none;
+      }
+      .code-card.is-primary .status.taken {
+        font-size: 0.8rem;
       }
       @keyframes stamp {
         from {
-          transform: translate(-50%, -50%) rotate(-10deg) scale(2.2);
+          transform: rotate(-8deg) scale(2.2);
           opacity: 0;
         }
       }
@@ -386,20 +390,26 @@
         color: var(--on-panel-faint);
         letter-spacing: 0.12em;
       }
+      /* A real Code 128 symbol. Scanners want dark bars on a light ground, and
+         each bar at least 2px wide: 3px where there is room, 2px below that. */
       .barcode {
-        height: 34px;
-        opacity: 0.55;
-        background: repeating-linear-gradient(
-          90deg,
-          var(--on-panel) 0 2px,
-          transparent 2px 4px,
-          var(--on-panel) 4px 5px,
-          transparent 5px 8px,
-          var(--on-panel) 8px 11px,
-          transparent 11px 12px,
-          var(--on-panel) 12px 13px,
-          transparent 13px 17px
-        );
+        display: flex;
+        justify-content: center;
+        height: 44px;
+        padding: 3px 0;
+        border-radius: 4px;
+        background: var(--on-panel);
+        color: var(--ink);
+      }
+      .barcode svg {
+        width: 429px;
+        height: 100%;
+        fill: currentColor;
+      }
+      @media (max-width: 900px) {
+        .barcode svg {
+          width: 286px;
+        }
       }
 
       /* ------------------------------------------- board of taken codes */
@@ -587,7 +597,8 @@
           </div>
           <div class="letters">
             <div class="strip" id="strip" aria-label="Letters kept and dropped"></div>
-            <div class="barcode" aria-hidden="true"></div>
+            <!-- scan me -->
+            <div class="barcode" aria-hidden="true"><svg viewBox="0 0 143 40" preserveAspectRatio="none" shape-rendering="crispEdges"><rect x="10" width="2" height="40"/><rect x="13" width="1" height="40"/><rect x="16" width="1" height="40"/><rect x="21" width="2" height="40"/><rect x="26" width="1" height="40"/><rect x="28" width="1" height="40"/><rect x="32" width="2" height="40"/><rect x="37" width="1" height="40"/><rect x="41" width="1" height="40"/><rect x="43" width="2" height="40"/><rect x="46" width="2" height="40"/><rect x="50" width="2" height="40"/><rect x="54" width="2" height="40"/><rect x="57" width="3" height="40"/><rect x="63" width="1" height="40"/><rect x="65" width="2" height="40"/><rect x="70" width="1" height="40"/><rect x="72" width="1" height="40"/><rect x="76" width="1" height="40"/><rect x="80" width="2" height="40"/><rect x="83" width="1" height="40"/><rect x="87" width="2" height="40"/><rect x="92" width="1" height="40"/><rect x="94" width="3" height="40"/><rect x="98" width="1" height="40"/><rect x="102" width="2" height="40"/><rect x="105" width="1" height="40"/><rect x="109" width="3" height="40"/><rect x="113" width="4" height="40"/><rect x="118" width="1" height="40"/><rect x="120" width="2" height="40"/><rect x="125" width="3" height="40"/><rect x="129" width="1" height="40"/><rect x="131" width="2" height="40"/></svg></div>
           </div>
         </div>
         <div class="pass-stub" aria-live="polite">
