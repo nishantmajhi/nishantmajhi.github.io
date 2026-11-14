@@ -6,7 +6,7 @@
     <title>Name Codes</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-size=%2278%22>✈️</text></svg>"
     />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700;800&display=swap");
@@ -172,34 +172,13 @@
         border-bottom-color: var(--paper);
       }
 
-      /* flight path from the name to the stub */
-      .route {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        margin: 22px 0 18px;
-        color: var(--on-panel);
-      }
-      .route::before {
-        content: "";
-        flex: 1;
-        border-top: 2px dashed var(--on-panel-faint);
-      }
-      /* an arrowhead at the end of the line, pointing at the stub */
-      .route span {
-        width: 0;
-        height: 0;
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-left: 9px solid var(--on-panel-faint);
-      }
-
       /* the name, letter by letter: what stays is lit, what goes is struck */
       .strip {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
         min-height: 2.6rem;
+        margin-top: 22px;
       }
       .tile {
         font-family: var(--mono);
@@ -572,10 +551,6 @@
           border-left: none;
           border-top: 2px dashed var(--on-panel-faint);
         }
-        .route span {
-          transform: rotate(90deg);
-          margin-right: 2px;
-        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -595,7 +570,6 @@
           <div class="pass-top"><span>Boarding pass</span><b>✈ NC</b></div>
           <label class="tag" for="firstName">From</label>
           <input id="firstName" type="text" placeholder="Your name" autocomplete="off" spellcheck="false" autofocus />
-          <div class="route" aria-hidden="true"><span></span></div>
           <div class="strip" id="strip" aria-label="Letters kept and dropped"></div>
         </div>
         <div class="pass-stub">
