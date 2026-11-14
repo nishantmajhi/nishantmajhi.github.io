@@ -390,25 +390,26 @@
         color: var(--on-panel-faint);
         letter-spacing: 0.12em;
       }
-      /* A real Code 128 symbol. Scanners want dark bars on a light ground, and
-         each bar at least 2px wide: 3px where there is room, 2px below that. */
+      /* A real Code 128 symbol, only as wide as it needs to be. Scanners want
+         dark bars on a light ground, and each bar at least two screen pixels:
+         2px on an ordinary screen, 1px where a pixel is two or more. */
       .barcode {
+        align-self: flex-start;
         display: flex;
-        justify-content: center;
-        height: 44px;
+        height: 34px;
         padding: 3px 0;
-        border-radius: 4px;
+        border-radius: 3px;
         background: var(--on-panel);
         color: var(--ink);
       }
       .barcode svg {
-        width: 429px;
+        width: 286px;
         height: 100%;
         fill: currentColor;
       }
-      @media (max-width: 900px) {
+      @media (min-resolution: 2dppx) {
         .barcode svg {
-          width: 286px;
+          width: 143px;
         }
       }
 
