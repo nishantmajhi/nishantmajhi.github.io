@@ -37,15 +37,21 @@
         margin: 0;
         padding: 0;
       }
-      /* the scrollbar disappears into the page's yellow */
+      /* scrollbar: a yellow thumb on a black track */
       html {
         background: var(--sign);
-        scrollbar-color: var(--sign) var(--sign);
+        scrollbar-color: var(--sign) var(--ink);
       }
-      ::-webkit-scrollbar,
-      ::-webkit-scrollbar-track,
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--ink);
+      }
       ::-webkit-scrollbar-thumb {
         background: var(--sign);
+        border: 3px solid var(--ink);
+        border-radius: 8px;
       }
       body {
         position: relative;
