@@ -91,6 +91,8 @@
         position: relative;
       }
       .pass-main {
+        display: flex;
+        flex-direction: column;
         border-radius: 14px 0 0 14px;
         padding: 22px clamp(18px, 3.5vw, 30px) 24px;
         /* bites out of the corners where the stub tears off */
@@ -178,7 +180,8 @@
         flex-wrap: wrap;
         gap: 6px;
         min-height: 2.6rem;
-        margin-top: 22px;
+        margin-top: auto;
+        padding-top: 22px;
       }
       .tile {
         font-family: var(--mono);
@@ -371,6 +374,10 @@
         cursor: not-allowed;
         transform: none;
       }
+      .code-card.alt-slot,
+      .code-card.blank .use-btn {
+        visibility: hidden;
+      }
       .code-card.blank .code {
         color: var(--on-panel-faint);
         letter-spacing: 0.12em;
@@ -543,6 +550,9 @@
           mask: radial-gradient(circle 12px at 0 0, transparent 98%, #000) left / 51% 100% no-repeat,
             radial-gradient(circle 12px at 100% 0, transparent 98%, #000) right / 51% 100% no-repeat;
         }
+        .code-card.alt-slot {
+          display: none;
+        }
         .pass-stub::before {
           left: 16px;
           right: 16px;
@@ -629,13 +639,19 @@
     </div>`;
       }
 
+      // Holds the alternate's place when there is none, so the pass does not
+      // change height as a name is typed. Hidden, and dropped on phones.
+      function altSlot() {
+        return '<div class="code-card alt-slot" aria-hidden="true"><div class="label"><span>Alt</span></div><div class="code">····</div><button class="use-btn" tabindex="-1">Use</button></div>';
+      }
+
       function renderOutput(primary, secondary) {
         const out = document.getElementById("output");
         // No vowel left makes a code hard to say; flag the alternate that has one.
         const easier = secondary && !/[AEIOU]/.test(primary) && /[AEIOU]/.test(secondary);
         out.innerHTML =
           codeCardHTML(primary, "To", true) +
-          (secondary ? codeCardHTML(secondary, "Alt", false, easier ? "+ vowel" : "") : "");
+          (secondary ? codeCardHTML(secondary, "Alt", false, easier ? "+ vowel" : "") : altSlot());
         out.querySelectorAll(".use-btn").forEach((btn) => {
           btn.addEventListener("click", () => {
             usedCodes.add(btn.dataset.code);
@@ -647,7 +663,8 @@
 
       function renderBlank() {
         document.getElementById("output").innerHTML =
-          '<div class="code-card is-primary blank"><div class="label"><span>To</span></div><div class="code">····</div></div>';
+          '<div class="code-card is-primary blank"><div class="label"><span>To</span></div><div class="code">····</div><button class="use-btn" tabindex="-1" aria-hidden="true">Use</button></div>' +
+          altSlot();
       }
 
       function renderDirectory() {
