@@ -65,21 +65,6 @@
       }
 
       /* ------------------------------------------------------------ header */
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-family: var(--mono);
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--on-panel);
-        background: var(--panel);
-        padding: 7px 14px;
-        border-radius: 4px;
-        margin-bottom: 18px;
-      }
       h1 {
         font-family: var(--cond);
         font-weight: 800;
@@ -97,7 +82,7 @@
       /* ----------------------------------------------------- boarding pass */
       .pass {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 260px;
+        grid-template-columns: minmax(0, 1fr) 290px;
       }
       .pass-main,
       .pass-stub {
@@ -374,14 +359,25 @@
         background: var(--paper);
         border-color: var(--paper);
       }
+      /* the alternate: label across the top, then the code and its button
+         side by side, centred on each other */
       .code-card:not(.is-primary) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px 12px;
         padding-top: 14px;
         border-top: 1px solid var(--seam);
       }
+      .code-card:not(.is-primary) .label {
+        flex-basis: 100%;
+        margin-bottom: -2px;
+      }
       .code-card:not(.is-primary) .use-btn {
         width: auto;
-        display: inline-block;
-        padding: 6px 10px;
+        margin-top: 0;
+        padding: 7px 10px;
         font-size: 0.66rem;
       }
       .use-btn:disabled,
@@ -587,7 +583,6 @@
   </head>
   <body>
     <div class="wrap">
-      <div class="eyebrow">✈ Name codes</div>
       <h1>KTM. PKH.<br /><span class="ghost">Now</span> your name.</h1>
 
       <div class="pass">
